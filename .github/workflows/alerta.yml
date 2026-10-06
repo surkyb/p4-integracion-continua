@@ -1,0 +1,26 @@
+name: Alerta NTFY
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  notificacion:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Ejecutar Hola Mundo
+        run: node hola.js
+
+      - name: Enviar notificacion a NTFY
+        run: |
+          curl -d "Nuevo codigo subido a la rama main - GitHub Actions ITLA" https://ntfy.sh/devops-itla
